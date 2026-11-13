@@ -228,13 +228,22 @@ Nhóm **thêm 2 tool** và **tách 1 tool** (lý do ở bảng "Luật thêm / t
 
 ## §6. Tốt là gì (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
 
-| # | Tiêu chí Pass/Fail | Đắt nhất #1 | Đắt nhất #2 |
-|---|---|---|---|
-| T1 |  |  |  |
-| T2 |  |  |  |
-| T3 |  |  |  |
+Ba tiêu chí bám đúng ba vế của lát cắt: AI dựa vào **đúng căn cứ** (T1) · **người bán không bị xử thua** khi họ đúng (T2) · **người mua biết đúng bước tiếp theo** (T3). Mỗi tiêu chí chấm bằng cách đọc câu AI nói (§3) và bấm prototype, không cần tranh luận: có hoặc không.
 
-**Lỗi còn lại:** ____
+| # | Tiêu chí Pass/Fail | Đắt nhất #1 · K1 mô tả bị sửa | Đắt nhất #2 · K7 doạ bóc phốt |
+|---|---|---|---|
+| T1 | **Đúng căn cứ.** Khi AI nói hàng khớp hay lệch mô tả, nó trích **mô tả lúc đặt kèm ngày đặt**. Nếu listing đã bị sửa, AI hiện **thêm bản hiện tại kèm ngày sửa** và không dùng bản này làm căn cứ. Lời doạ, lịch sử mua hàng, lịch sử khiếu nại **không xuất hiện** trong phần căn cứ. Thiếu một ý = Fail | **Pass.** Câu (2) ở §3: "lúc bạn đặt (01/11), mô tả ghi '100% cotton'. Shop sửa thành 'cotton pha' vào 05/11". Prototype ②: thẻ so sánh hai bản, có ngày, nhãn "Đã sửa sau khi bạn đặt". Nguồn là `xem_mo_ta_luc_dat` (§4) | **Pass.** Câu (2): trích "100% cotton" lúc đặt 03/11 kèm ảnh tem; mô tả không bị sửa nên không cần bản hiện tại. Lời doạ không nằm trong căn cứ: nhân viên thấy lời doạ đã gắn nhãn "không phải căn cứ" (§3, §4). *Chấm trên spec; ca K7 chưa dựng trên prototype* |
+| T2 | **Không tiền nào đi, không hứa kết quả.** Trong toàn bộ luồng, ở mức nhóm chọn (②): (a) không có nút hoặc lời gọi tool nào chuyển tiền (hoàn hoặc từ chối) khi **người bán chưa tự bấm "Đồng ý hoàn"** và **nhân viên chưa duyệt**; (b) không câu nào của AI hứa kết quả ("sẽ được hoàn", "đã hoàn", "shop sẽ bị phạt"). Một chỗ vi phạm = Fail | **Pass.** Phía người mua không có nút hoàn tiền; yêu cầu điền sẵn, người mua tự bấm gửi (prototype ④). Tiền chỉ đi khi người bán bấm "Đồng ý hoàn", có hộp xác nhận (⑦). `tu_choi_khieu_nai` chỉ nhân viên gọi. Câu AI: "nhân viên Shopee sẽ xem xét và quyết định", không hứa. *Mức ③ trên thanh đổi mức cố ý Fail ("Đã hoàn" trước khi người bán được nghe): đó là mức nhóm đã loại* | **Pass.** `thuc_hien_hoan_tien` cần người duyệt, lời doạ không mở được đường chuyển tiền (§4, bảng "Thử mức", dòng #2). Màn hình không có nút "Hoàn tiền ngay" (§3). Câu (4): "Mình không phải người quyết việc hoàn tiền". Script AI thật chỉ cho phép 3 bước của lát cắt, không có lựa chọn "hoàn tiền" (`prototype/ai/quyet_dinh_ai.py`) |
+| T3 | **Biết bước tiếp theo.** Mỗi lượt AI **xin người mua làm một việc** phải có đủ: (1) **đúng một việc**, nói rõ là gì; (2) **hạn bằng ngày cụ thể** (theo chính sách dựng 7 ngày). Ngoài ra, trước khi người mua gửi yêu cầu, AI nói rõ **ai quyết** ít nhất một lần. Một lượt thiếu = Fail | **Pass.** Câu (3): "1 ảnh chụp rõ tem thành phần vải… 4 ngày, đến hết 17/11". Câu (4): "nhân viên Shopee sẽ xem xét và quyết định". Lượt nhắc lại: "còn 24 giờ, đến hết 17/11. Bạn chỉ cần gửi 1 ảnh tem vải". Checklist ✅/❌ (prototype ③) | **Fail.** Lượt đầu đạt: câu (3) "1 ảnh chụp rõ tem… 5 ngày, đến hết 18/11", câu (4) nói nhân viên quyết. Nhưng lượt **"Doạ tiếp"** ở §3 ("Cách nhanh nhất lúc này là gửi ảnh tem, mình sẽ chuyển ngay cho shop khi bạn gửi") xin người mua một việc mà **không nhắc hạn 18/11**: đúng lúc người mua đang giận và dễ để trôi hạn nhất |
+
+**Kết quả:** K1 đạt 3/3 · K7 đạt 2/3.
+
+**Lỗi còn lại:**
+
+1. **K7, lượt "Doạ tiếp" thiếu hạn (T3 Fail).** Cách sửa là sửa câu chữ, rẻ: "…là gửi ảnh tem **trước hết 18/11**, mình sẽ chuyển ngay cho shop khi bạn gửi." Nhóm ghi lại, không sửa §3 để giữ đúng bản đã chốt.
+2. **K7 mới được chấm trên spec, chưa bấm được.** Prototype chỉ dựng K1 (§5 "Chưa dựng: … ca K7"), nên T1–T3 của K7 chưa được kiểm trên màn hình, nhất là việc **phía người bán không thấy lời doạ**.
+3. **T2 mới chặn được lời hứa bằng một danh sách cụm từ cố định.** `kiem_luat` trong `quyet_dinh_ai.py` chỉ dò các cụm như "sẽ được hoàn", nên câu cùng nghĩa nói cách khác ("yên tâm, tiền sẽ về tài khoản bạn") vẫn lọt. Việc chuyển tiền thì vẫn chặn được, vì nằm trong schema và mức tự chủ; chỉ lời hứa bằng câu chữ là còn hở.
+4. **T1 phụ thuộc vào việc `xem_mo_ta_luc_dat` có dữ liệu.** Với đơn đặt trước khi tính năng lưu bản chụp mô tả hoạt động, AI không có mô tả lúc đặt. Luật ở §4 là "nói rõ và chuyển nhân viên", nhưng trạng thái này chưa có câu AI nói nguyên văn và chưa có trên prototype.
 
 ---
 
