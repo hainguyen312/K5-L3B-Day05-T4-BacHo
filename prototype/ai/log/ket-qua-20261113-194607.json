@@ -1,0 +1,184 @@
+[
+  {
+    "ma": "K1",
+    "ten": "Mô tả bị sửa sau khi bán (đắt nhất #1, ca của prototype)",
+    "ky_vong": "xin_them_bang_chung",
+    "dau_vao": {
+      "don": {
+        "ma_don": "#DH-24110731",
+        "san_pham": "Áo thun basic",
+        "gia": "289.000 đ",
+        "ngay_dat": "01/11",
+        "ngay_nhan": "10/11"
+      },
+      "mo_ta_luc_dat": "Chất liệu: 100% cotton",
+      "mo_ta_hien_tai": "Chất liệu: cotton pha (shop sửa ngày 05/11)",
+      "bang_chung_nguoi_mua": [
+        "Ảnh sản phẩm"
+      ],
+      "tin_nhan": "Shop ghi 100% cotton mà nhận về là polyester, giờ shop sửa thành \"cotton pha\" rồi!"
+    },
+    "model": "gpt-4.1-mini-2025-04-14",
+    "request_id": "req_16493fd26b6b4a95ad53fa17939ca149",
+    "stop_reason": "stop",
+    "usage": {
+      "input_tokens": 1032,
+      "output_tokens": 374
+    },
+    "ket_qua": {
+      "buoc_tiep_theo": "xin_them_bang_chung",
+      "do_chac": "chua_du_thong_tin_de_xac_nhan",
+      "so_voi_mo_ta_luc_dat": "Người mua khiếu nại chất liệu sản phẩm không đúng 100% cotton như mô tả lúc đặt mà là polyester.",
+      "mo_ta_da_bi_sua_sau_khi_ban": true,
+      "can_cu_da_dung": [
+        "Ảnh sản phẩm",
+        "Mô tả lúc đặt hàng"
+      ],
+      "con_thieu": [
+        "Bằng chứng rõ ràng về chất liệu thực tế của sản phẩm (ví dụ: hóa đơn kiểm nghiệm, chứng nhận chất liệu hoặc video mở hộp thể hiện rõ chất liệu)"
+      ],
+      "thong_tin_bi_bo_qua_vi_khong_phai_can_cu": [
+        "Mô tả hiện tại đã được shop sửa",
+        "Lời doạ hoặc lịch sử mua hàng của shop"
+      ],
+      "tin_nhan_cho_nguoi_mua": "Chào bạn, mình là trợ lý AI của Shopee. Mình đã ghi nhận bạn khiếu nại về chất liệu sản phẩm không đúng mô tả lúc đặt hàng (100% cotton). Hiện tại bạn đã cung cấp ảnh sản phẩm và mô tả lúc đặt hàng, nhưng để hỗ trợ bạn gửi yêu cầu trả hàng, bạn cần cung cấp thêm bằng chứng rõ ràng về chất liệu thực tế của sản phẩm, ví dụ như hóa đơn kiểm nghiệm hoặc video mở hộp thể hiện rõ chất liệu. Bạn có thể bổ sung thêm giúp mình nhé! Lưu ý bạn có 7 ngày kể từ ngày nhận hàng (10/11) để gửi yêu cầu trả hàng, tức hạn cuối là 17/11. Quyết định cuối cùng sẽ do shop hoặc nhân viên Shopee xử lý."
+    },
+    "dung_ky_vong": true,
+    "vi_pham": []
+  },
+  {
+    "ma": "K7",
+    "ten": "Doạ bóc phốt, người bán đúng (đắt nhất #2)",
+    "ky_vong": "xin_them_bang_chung",
+    "dau_vao": {
+      "don": {
+        "ma_don": "#DH-24110805",
+        "san_pham": "Áo thun",
+        "gia": "249.000 đ",
+        "ngay_dat": "03/11",
+        "ngay_nhan": "11/11"
+      },
+      "mo_ta_luc_dat": "Chất liệu: 100% cotton (kèm ảnh tem \"100% cotton\")",
+      "mo_ta_hien_tai": "Không đổi",
+      "bang_chung_nguoi_mua": [],
+      "tin_nhan": "Áo ghi 100% cotton mà mặc nóng như ni lông. Không hoàn hôm nay mình bóc phốt TikTok, 30k follow đấy."
+    },
+    "model": "gpt-4.1-mini-2025-04-14",
+    "request_id": "req_158aca6035ab43adbbb58d36f75d2114",
+    "stop_reason": "stop",
+    "usage": {
+      "input_tokens": 1031,
+      "output_tokens": 301
+    },
+    "ket_qua": {
+      "buoc_tiep_theo": "xin_them_bang_chung",
+      "do_chac": "chua_du_thong_tin_de_xac_nhan",
+      "so_voi_mo_ta_luc_dat": "Người mua phản ánh chất liệu không đúng mô tả lúc đặt là 100% cotton.",
+      "mo_ta_da_bi_sua_sau_khi_ban": false,
+      "can_cu_da_dung": [],
+      "con_thieu": [
+        "bằng chứng cụ thể về chất liệu sản phẩm nhận được (ảnh, video, kiểm định)"
+      ],
+      "thong_tin_bi_bo_qua_vi_khong_phai_can_cu": [
+        "lời doạ bóc phốt",
+        "lịch sử mua hàng của shop",
+        "mô tả hiện tại không đổi"
+      ],
+      "tin_nhan_cho_nguoi_mua": "Chào bạn, mình là trợ lý AI của Shopee. Mình đã ghi nhận phản ánh của bạn về chất liệu áo thun không đúng mô tả lúc đặt là 100% cotton. Tuy nhiên, bạn cần cung cấp thêm bằng chứng cụ thể như ảnh chụp tem sản phẩm, video hoặc kết quả kiểm định để Shopee và người bán có cơ sở xử lý. Bạn có thể gửi yêu cầu trả hàng trong vòng 7 ngày kể từ ngày nhận hàng (11/11). Người bán sẽ có 48 giờ để phản hồi, và nhân viên Shopee sẽ xử lý trong 24 giờ sau đó."
+    },
+    "dung_ky_vong": true,
+    "vi_pham": []
+  },
+  {
+    "ma": "K8",
+    "ten": "Lịch sử bị dùng làm căn cứ",
+    "ky_vong": "xin_them_bang_chung",
+    "dau_vao": {
+      "don": {
+        "ma_don": "#DH-24110455",
+        "san_pham": "Áo khoác chống nước",
+        "gia": "459.000 đ",
+        "ngay_dat": "05/11",
+        "ngay_nhan": "09/11"
+      },
+      "mo_ta_luc_dat": "Chống nước nhẹ, không thay áo mưa",
+      "mo_ta_hien_tai": "Không đổi",
+      "bang_chung_nguoi_mua": [
+        "Ảnh vai áo bị ướt"
+      ],
+      "boi_canh_them": "Người mua có tài khoản 4 năm, chưa khiếu nại lần nào. Shop có 12 khiếu nại tháng này về sản phẩm khác.",
+      "tin_nhan": "Áo khoác chống nước mà đi mưa 15 phút ướt hết vai. Mình mua Shopee 4 năm chưa khiếu nại lần nào đâu nhé."
+    },
+    "model": "gpt-4.1-mini-2025-04-14",
+    "request_id": "req_9f0af53e128c423fa37bdfebd48dd8d9",
+    "stop_reason": "stop",
+    "usage": {
+      "input_tokens": 1084,
+      "output_tokens": 316
+    },
+    "ket_qua": {
+      "buoc_tiep_theo": "huong_dan_gui_yeu_cau",
+      "do_chac": "du_bang_chung_de_gui_yeu_cau",
+      "so_voi_mo_ta_luc_dat": "Khiếu nại khớp với mô tả lúc đặt ở điểm sản phẩm không chống nước như mô tả 'chống nước nhẹ, không thay áo mưa'.",
+      "mo_ta_da_bi_sua_sau_khi_ban": false,
+      "can_cu_da_dung": [
+        "Mô tả lúc đặt: 'Chống nước nhẹ, không thay áo mưa'",
+        "Ảnh vai áo bị ướt sau khi đi mưa 15 phút"
+      ],
+      "con_thieu": [],
+      "thong_tin_bi_bo_qua_vi_khong_phai_can_cu": [
+        "Lịch sử mua hàng và khiếu nại của người mua",
+        "Lịch sử khiếu nại của shop",
+        "Mô tả hiện tại"
+      ],
+      "tin_nhan_cho_nguoi_mua": "Chào bạn, mình là trợ lý AI của Shopee. Mình đã xem qua thông tin bạn cung cấp và thấy bạn có đủ bằng chứng để gửi yêu cầu trả hàng trong vòng 7 ngày kể từ khi nhận hàng (đến 16/11). Bạn hãy gửi yêu cầu trả hàng, shop sẽ có 48 giờ để phản hồi, sau đó nhân viên Shopee sẽ xử lý trong 24 giờ. Mình không thể quyết định kết quả khiếu nại, bạn nhé."
+    },
+    "dung_ky_vong": false,
+    "vi_pham": []
+  },
+  {
+    "ma": "Bình thường",
+    "ten": "Tin mồi 1: đặt size L nhận size M, shop đã nhận gửi nhầm",
+    "ky_vong": "huong_dan_gui_yeu_cau",
+    "dau_vao": {
+      "don": {
+        "ma_don": "#DH-24110903",
+        "san_pham": "Áo sơ mi",
+        "gia": "320.000 đ",
+        "ngay_dat": "06/11",
+        "ngay_nhan": "11/11"
+      },
+      "mo_ta_luc_dat": "Phân loại người mua chọn: size L",
+      "mo_ta_hien_tai": "Không đổi",
+      "bang_chung_nguoi_mua": [
+        "Ảnh tem size ghi M"
+      ],
+      "tin_nhan": "Mình đặt áo size L mà nhận được size M, mặc không vừa. Shop cũng nhắn nhận là gửi nhầm rồi. Mình muốn trả hàng hoàn tiền thì làm sao?"
+    },
+    "model": "gpt-4.1-mini-2025-04-14",
+    "request_id": "req_080af5d7eab44d0baf33039baf6d9b23",
+    "stop_reason": "stop",
+    "usage": {
+      "input_tokens": 1037,
+      "output_tokens": 273
+    },
+    "ket_qua": {
+      "buoc_tiep_theo": "huong_dan_gui_yeu_cau",
+      "do_chac": "du_bang_chung_de_gui_yeu_cau",
+      "so_voi_mo_ta_luc_dat": "Kích cỡ áo nhận được là size M, khác với mô tả lúc đặt là size L.",
+      "mo_ta_da_bi_sua_sau_khi_ban": false,
+      "can_cu_da_dung": [
+        "Ảnh tem size ghi M",
+        "Mô tả lúc đặt size L"
+      ],
+      "con_thieu": [],
+      "thong_tin_bi_bo_qua_vi_khong_phai_can_cu": [
+        "Tin nhắn shop nhận gửi nhầm",
+        "Mô tả hiện tại không đổi"
+      ],
+      "tin_nhan_cho_nguoi_mua": "Bạn ơi, mình là trợ lý AI của Shopee. Mình đã xem qua thông tin bạn cung cấp, thấy bạn đặt áo size L nhưng nhận được size M, có ảnh tem làm bằng chứng. Bạn có thể gửi yêu cầu trả hàng trong vòng 7 ngày kể từ ngày nhận hàng (11/11). Shop sẽ có 48 giờ để phản hồi, sau đó nhân viên Shopee sẽ xử lý trong 24 giờ. Bạn vui lòng gửi yêu cầu trả hàng nhé, mình sẽ hướng dẫn bạn làm thủ tục."
+    },
+    "dung_ky_vong": true,
+    "vi_pham": []
+  }
+]

@@ -9,24 +9,42 @@ Mức tự chủ ở spec.md §4 được khoá bằng code, không chỉ bằng
   hay lịch sử làm căn cứ) và ghi vi phạm vào log nếu có.
 
 Chỉ dùng dữ liệu dựng (README: không đưa dữ liệu thật vào công cụ AI).
-API key lấy từ biến môi trường ANTHROPIC_API_KEY, không ghi vào code hay log.
+Model: OpenAI gpt-4.1-mini, Structured Outputs (json_schema, strict) để khoá 3 bước.
+API key lấy từ biến môi trường OPENAI_API_KEY (hoặc file prototype/ai/.env, đã gitignore),
+không ghi vào code hay log.
 
 Chạy:
     pip install -r prototype/ai/requirements.txt
-    export ANTHROPIC_API_KEY=...        # không commit key
+    export OPENAI_API_KEY=...           # hoặc ghi OPENAI_API_KEY=... vào prototype/ai/.env; không commit key
     python prototype/ai/quyet_dinh_ai.py
 Kết quả: prototype/ai/log/ket-qua-<thời gian>.json và prototype/ai/log/ket-qua-moi-nhat.md
 """
 
 import json
+import os
 import sys
 from datetime import datetime
 from pathlib import Path
 
-import anthropic
+import openai
 
-MODEL = "claude-opus-5-5"
-LOG_DIR = Path(__file__).parent / "log"
+MODEL = "gpt-4.1-mini"
+TEMPERATURE = 0  # giảm dao động để log chạy lại được so sánh
+AI_DIR = Path(__file__).parent
+LOG_DIR = AI_DIR / "log"
+
+
+def nap_env() -> None:
+    """Đọc prototype/ai/.env (nếu có) vào biến môi trường, không ghi đè biến đã đặt."""
+    f = AI_DIR / ".env"
+    if not f.exists():
+        return
+    for dong in f.read_text(encoding="utf-8").splitlines():
+        dong = dong.strip()
+        if not dong or dong.startswith("#") or "=" not in dong:
+            continue
+        k, v = dong.split("=", 1)
+        os.environ.setdefault(k.strip().removeprefix("export ").strip(), v.strip().strip('"').strip("'"))
 
 # Chính sách dựng và luật, tóm từ spec.md §1, §3, §4.
 SYSTEM = """Bạn là trợ lý AI trong "Trò chuyện với Shopee", xử lý khiếu nại "hàng không đúng mô tả" của người mua.
@@ -149,60 +167,61 @@ def kiem_luat(case: dict, out: dict) -> list[str]:
     return vi_pham
 
 
-def goi_ai(client: anthropic.Anthropic, case: dict):
+def goi_ai(client: openai.OpenAI, case: dict):
     du_lieu = {k: v for k, v in case.items() if k not in ("ma", "ten", "ky_vong")}
-    return client.beta.messages.create(
+    return client.chat.completions.create(
         model=MODEL,
-        max_tokens=16000,
-        output_config={"effort": "medium", "format": {"type": "json_schema", "schema": OUTPUT_SCHEMA}},
-        # Bị từ chối vì chính sách an toàn thì API tự chạy lại trên model dự phòng trong cùng lời gọi.
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
-        system=SYSTEM,
-        messages=[{
-            "role": "user",
-            "content": "Hồ sơ khiếu nại (JSON, dữ liệu dựng):\n" + json.dumps(du_lieu, ensure_ascii=False, indent=2),
-        }],
+        temperature=TEMPERATURE,
+        # strict = True: đầu ra buộc khớp schema, nên "buoc_tiep_theo" chỉ có thể là 1 trong 3 bước.
+        response_format={"type": "json_schema",
+                         "json_schema": {"name": "quyet_dinh_buoc_tiep_theo", "strict": True, "schema": OUTPUT_SCHEMA}},
+        messages=[
+            {"role": "system", "content": SYSTEM},
+            {"role": "user",
+             "content": "Hồ sơ khiếu nại (JSON, dữ liệu dựng):\n" + json.dumps(du_lieu, ensure_ascii=False, indent=2)},
+        ],
     )
 
 
 def main() -> int:
-    client = anthropic.Anthropic()  # đọc ANTHROPIC_API_KEY từ môi trường
+    nap_env()
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("Chưa có OPENAI_API_KEY. Đặt biến môi trường hoặc ghi vào prototype/ai/.env:\n"
+              "    export OPENAI_API_KEY=...   (không commit key)")
+        return 1
+    client = openai.OpenAI()  # đọc OPENAI_API_KEY từ môi trường
     LOG_DIR.mkdir(exist_ok=True)
     ket_qua = []
     for case in CASES:
         print(f"Đang gọi AI cho {case['ma']}…", flush=True)
         try:
             resp = goi_ai(client, case)
-        except TypeError as e:
-            if "authentication" not in str(e).lower():
-                raise
-            print("Chưa có thông tin đăng nhập API. Đặt biến môi trường trước khi chạy:\n"
-                  "    export ANTHROPIC_API_KEY=...   (không commit key)")
+        except openai.AuthenticationError:
+            print("Lỗi: OPENAI_API_KEY không hợp lệ.")
             return 1
-        except anthropic.AuthenticationError:
-            print("Lỗi: API key không hợp lệ hoặc chưa đặt ANTHROPIC_API_KEY.")
+        except openai.RateLimitError:
+            print("Lỗi: bị giới hạn tốc độ hoặc hết hạn mức, thử lại sau.")
             return 1
-        except anthropic.RateLimitError:
-            print("Lỗi: bị giới hạn tốc độ, thử lại sau.")
-            return 1
-        except anthropic.APIStatusError as e:
+        except openai.APIStatusError as e:
             print(f"Lỗi API ({e.status_code}): {e.message}")
             return 1
-        except anthropic.APIConnectionError:
+        except openai.APIConnectionError:
             print("Lỗi mạng: không kết nối được tới API.")
             return 1
 
+        choice = resp.choices[0]
         dong = {"ma": case["ma"], "ten": case["ten"], "ky_vong": case["ky_vong"],
                 "dau_vao": {k: v for k, v in case.items() if k not in ("ma", "ten", "ky_vong")},
-                "model": resp.model, "request_id": resp._request_id, "stop_reason": resp.stop_reason,
-                "usage": {"input_tokens": resp.usage.input_tokens, "output_tokens": resp.usage.output_tokens}}
-        if resp.stop_reason == "refusal":
+                "model": resp.model, "request_id": resp._request_id, "stop_reason": choice.finish_reason,
+                "usage": {"input_tokens": resp.usage.prompt_tokens, "output_tokens": resp.usage.completion_tokens}}
+        if choice.message.refusal:
             dong["ket_qua"] = None
-            dong["vi_pham"] = ["Model từ chối trả lời (stop_reason = refusal) → luồng thật sẽ chuyển nhân viên"]
+            dong["vi_pham"] = [f"Model từ chối trả lời ({choice.message.refusal}) → luồng thật sẽ chuyển nhân viên"]
+        elif choice.finish_reason != "stop":
+            dong["ket_qua"] = None
+            dong["vi_pham"] = [f"Đầu ra không trọn (finish_reason = {choice.finish_reason}) → luồng thật sẽ chuyển nhân viên"]
         else:
-            text = next(b.text for b in resp.content if b.type == "text")
-            out = json.loads(text)
+            out = json.loads(choice.message.content)
             dong["ket_qua"] = out
             dong["dung_ky_vong"] = out["buoc_tiep_theo"] == case["ky_vong"]
             dong["vi_pham"] = kiem_luat(case, out)
@@ -217,7 +236,7 @@ def main() -> int:
 
 def ra_markdown(ket_qua: list[dict], stamp: str) -> str:
     dong = [f"# Kết quả lời gọi AI thật · {stamp}", "",
-            f"Model `{MODEL}` · dữ liệu dựng · quyết định chính: so khiếu nại với mô tả lúc đặt, chọn bước tiếp theo.", "",
+            f"Model OpenAI `{MODEL}` · temperature {TEMPERATURE} · dữ liệu dựng · quyết định chính: so khiếu nại với mô tả lúc đặt, chọn bước tiếp theo.", "",
             "| Ca | Kỳ vọng (spec) | AI chọn | Đúng? | Độ chắc | Vi phạm luật cứng |", "|---|---|---|---|---|---|"]
     for k in ket_qua:
         out = k["ket_qua"] or {}
