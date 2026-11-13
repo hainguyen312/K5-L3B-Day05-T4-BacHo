@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Prototype · T4 TMĐT · BacHo — mô tả bị sửa sau khi bán, ba mức tự chủ</title>
+<style>
+:root{--ink:#1c1f23;--mut:#6b7280;--line:#e7e5e0;--bg:#f4f2ee;--card:#fff;--g:#15803d;--gb:#e8f5ec;--a:#9a6408;--ab:#fdf3dc;--r:#b42318;--rb:#fdecea;--b:#1d4ed8;--bb:#eaf1fe;--o:#ee4d2d;--o2:#ff7337;--chat:#f5f6f8;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(1200px 500px at 10% -10%,#fff3ec 0,transparent 60%),var(--bg);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.86em;background:#f1efe9;border-radius:5px;padding:1px 5px}
+header{position:sticky;top:0;z-index:5;padding:16px 28px 12px;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.eyebrow{display:inline-flex;gap:6px;align-items:center;font-size:12px;font-weight:600;color:var(--o);background:#fff1ec;border:1px solid #ffd8cb;border-radius:999px;padding:2px 10px;margin-bottom:6px}
+h1{font-size:21px;margin:0 0 4px;letter-spacing:-.01em}.sub{color:var(--mut);font-size:13.5px;max-width:1100px}
+.sub b{color:var(--ink)}
+.toggle{display:flex;gap:10px;margin:12px 0 2px;flex-wrap:wrap;align-items:center}
+.toggle>span:first-child{font-size:13px;color:var(--mut);font-weight:600}
+.seg{display:inline-flex;background:#f1efe9;border-radius:999px;padding:4px;gap:4px;flex-wrap:wrap}
+.toggle button{border:0;background:transparent;border-radius:999px;padding:7px 14px;font:inherit;font-size:13.5px;cursor:pointer;color:#44403c;transition:.15s}
+.toggle button:hover{background:#fff}
+.toggle button.on{background:var(--ink);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.annt{font-size:13px;color:var(--mut);display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+main{display:grid;grid-template-columns:440px 1fr;gap:28px;padding:24px 28px 32px;max-width:1360px;margin:0 auto}
+@media(max-width:960px){main{grid-template-columns:1fr;padding:16px}header{padding:14px 16px;position:static}}
+/* khung điện thoại */
+.phone{background:#111;border-radius:40px;padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.4);align-self:start;position:sticky;top:150px}
+@media(max-width:960px){.phone{position:static}}
+.screen{background:var(--chat);border-radius:31px;overflow:hidden}
+.bar{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:#fff;padding:14px 18px 12px;background:linear-gradient(135deg,var(--o),var(--o2))}
+.bar b{color:#fff;font-size:15px;display:block}
+.bar .st{opacity:.85}
+.bar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#bbf7d0;margin-right:5px}
+.human{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:10px 12px 0;padding:8px 10px 8px 12px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.human .btn{font-size:12.5px;padding:6px 11px;border-radius:999px}
+.order{margin:8px 12px;padding:10px 12px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:13px;display:flex;gap:10px;align-items:center}
+.order .thumb{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#fde7dd,#fff4ee);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.order b{color:var(--o)}
+.chat{display:flex;flex-direction:column;gap:8px;padding:6px 12px 16px;min-height:460px}
+.me{align-self:flex-end;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;padding:9px 13px;border-radius:18px 18px 4px 18px;max-width:84%;box-shadow:0 2px 6px rgba(238,77,45,.25)}
+.me small{display:block;opacity:.9;font-size:12px;margin-top:4px}
+.ai{align-self:flex-start;background:#fff;padding:10px 13px;border-radius:18px 18px 18px 4px;max-width:94%;box-shadow:0 1px 2px rgba(16,24,40,.06);border:1px solid #eeece7}
+.ai .who{font-size:11.5px;color:var(--mut);margin-bottom:4px;display:flex;align-items:center;gap:4px;font-weight:600}
+.ai .who::before{content:"AI";display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:9.5px;font-weight:700}
+.ai+.ai{border-top-left-radius:6px}
+.sys{align-self:center;font-size:11.5px;color:var(--mut);background:#eceef2;border-radius:999px;padding:3px 10px;text-align:center}
+.conf{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;margin:2px 0;background:var(--ab);color:var(--a);font-weight:600;border:1px solid #f6e0a8}
+.ev{font-size:12.5px;border:1px solid var(--line);border-radius:12px;margin-top:8px;background:#fcfbf9;overflow:hidden}
+.ev .h{padding:6px 10px;color:var(--mut);border-bottom:1px solid var(--line);font-weight:600;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap;background:#fff}
+.ev .row{display:grid;grid-template-columns:1fr 1fr}
+.ev .row div{padding:8px 10px}
+.ev .row div+div{border-left:1px solid var(--line)}
+.tag{display:inline-block;font-size:11px;border-radius:6px;padding:1px 7px;margin-bottom:3px;font-weight:600}
+.tag.main{background:var(--gb);color:var(--g)}.tag.edit{background:var(--rb);color:var(--r)}
+mark{background:#fde68a;padding:0 3px;border-radius:4px}
+.chk{list-style:none;padding:0;margin:6px 0 0;font-size:13.5px}.chk li{padding:1px 0}
+.box{border-radius:14px;padding:10px 12px;margin-top:8px;font-size:14px}
+.box.hold{background:var(--gb);border:1px solid #bfe3cb}.box.warn{background:#fffaf0;border:1px solid #f3dfb0}.box.done{background:var(--bb);border:1px solid #c9daf8}.box.red{background:var(--rb);border:1px solid #f4c7c1}
+.form{background:#fff;border:1.5px dashed #e5d6b4;border-radius:12px;padding:8px 10px;margin-top:8px;font-size:13px}
+.form div{display:flex;justify-content:space-between;gap:8px;padding:3px 0}.form div span:first-child{color:var(--mut)}
+.form div+div{border-top:1px solid #f3efe6}
+.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.btn{border:0;border-radius:12px;padding:8px 13px;font:inherit;font-size:14px;cursor:pointer;background:#efede8;color:var(--ink);font-weight:500;transition:transform .08s,filter .15s,background .15s}
+.btn:hover{filter:brightness(.96)}.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--g);color:#fff;box-shadow:0 2px 6px rgba(21,128,61,.25)}.btn.out{background:#fff;border:1.5px solid var(--ink)}.btn.danger{background:var(--r);color:#fff}.btn.sm{font-size:12.5px;padding:5px 10px;border-radius:999px;background:#e9e7e1}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.timer{font-variant-numeric:tabular-nums;font-weight:700}
+.n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#ea580c;color:#fff;font-size:11px;font-weight:700;margin-right:4px;vertical-align:1px;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3px #fdba74}
+.hide-n .n{display:none}
+aside{display:flex;flex-direction:column;gap:18px;min-width:0}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 20px;box-shadow:var(--sh)}
+.panel h2{font-size:15.5px;margin:0 0 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.panel h2 .ic{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;background:#f1efe9}
+.seller{box-shadow:inset 0 4px 0 var(--o),var(--sh)}
+.seller h2 small{font-weight:400;color:var(--mut);font-size:13px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}td,th{border-bottom:1px solid #f0eee9;padding:8px 8px;text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+td small{color:var(--mut)}
+td code{background:none;padding:0;font-size:12.5px}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-auto{background:var(--gb);color:var(--g)}.p-ask{background:var(--ab);color:var(--a)}.p-no{background:var(--rb);color:var(--r)}.p-sug{background:#eceae4;color:#555}
+.changed td{background:#fffaeb}.changed td:first-child{box-shadow:inset 3px 0 0 #f59e0b}
+.ann li{margin-bottom:8px;font-size:14px}.ann{padding-left:0;list-style:none;margin:0}
+.promise{font-size:15px;border-left:4px solid var(--o);padding:10px 14px;background:#fffaf7;border-radius:0 12px 12px 0}
+.muted{color:var(--mut);font-size:13.5px}
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.45);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.modal.show{display:flex}.modal .card{background:#fff;border-radius:20px;padding:20px 22px;max-width:420px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+label{font-size:14px}
+.foot{font-size:12px;color:var(--mut);padding:0 28px 24px;max-width:1360px;margin:0 auto}
+</style></head>
+<body>
+<header>
+ <div class="eyebrow">LAB5 · Nhóm BacHo · L3B · T4</div>
+ <h1>Prototype · T4 Thương mại điện tử — K1 mô tả bị sửa sau khi bán, AI ở ba mức tự chủ</h1>
+ <div class="sub">Cùng một ca, cùng một model. Chỉ đổi <b>mức tự chủ của việc chuyển tiền hoàn</b> — tool khó xếp nhất ở §4, nhóm tách <code>soan_hoan_tien</code> thành <code>soan_de_xuat_hoan_tien</code> + <code>thuc_hien_hoan_tien</code>. Dữ liệu dựng. Chính sách dựng: trả hàng trong <b>7 ngày</b> kể từ khi nhận · người bán phản hồi trong <b>48 giờ</b> · nhân viên xử lý trong <b>24 giờ</b>. Hôm nay 13/11.</div>
+ <div class="toggle"><span>Mức tự chủ của việc hoàn tiền:</span>
+  <span class="seg"><button data-l="1">① Chỉ hướng dẫn — người mua tự làm</button>
+  <button data-l="2" class="on">② Cần người duyệt (người bán / nhân viên)</button>
+  <button data-l="3">③ AI tự hoàn + hoàn tác</button></span>
+  <label class="annt"><input type="checkbox" id="ann" checked> Hiện số chú thích HAX/PAIR</label>
+ </div>
+</header>
+<main>
+ <section class="phone">
+  <div class="screen">
+  <div class="bar"><span><b>Trò chuyện với Shopee</b><span class="st"><span class="dot"></span>Trợ lý AI · phía người mua</span></span><span class="st">13/11 10:20</span></div>
+  <div class="human"><span><span class="n">5</span>Không muốn chat với AI?</span><button class="btn out" onclick="go('human')">Nói chuyện với người thật</button></div>
+  <div class="order"><div class="thumb">👕</div><div><b>#DH-24110731</b> · Áo thun basic · <b>289.000 đ</b><br><span class="muted" style="font-size:12.5px">Shop Thời Trang Lam An · đặt 01/11 · nhận 10/11</span></div></div>
+  <div class="chat" id="chat"></div>
+  </div>
+ </section>
+ <aside>
+  <div class="panel"><h2><span class="ic">🤝</span>Lời hứa với người mua và người bán ở mức này</h2><div class="promise" id="promise"></div></div>
+  <div class="panel seller"><h2><span class="ic">🏪</span><span class="n">7</span>Kênh người bán <small>— cùng hồ sơ, phía Shop Thời Trang Lam An</small></h2><div id="seller"></div></div>
+  <div class="panel"><h2><span class="ic">⚙️</span>Mức tự chủ của các tool theo §4 (dòng tô vàng là tool đang đổi)</h2>
+   <div class="tbl"><table><tr><th>Tool</th><th>Mức</th><th>Vì sao (cái giá khi sai)</th></tr><tbody id="tools"></tbody></table></div></div>
+  <div class="panel"><h2><span class="ic">📍</span>Chú thích: nguyên tắc nào nằm ở đâu</h2><ul class="ann" id="ann-list"></ul></div>
+ </aside>
+</main>
+<div class="foot">LAB5 · AI20K K5 · Ngày 5 · Nhóm BacHo. Một file HTML, không gọi AI thật, không gửi dữ liệu đi đâu. Tên shop, đơn hàng, người mua đều là dữ liệu dựng.</div>
+
+<div class="modal" id="m"><div class="card">
+ <b>Đồng ý hoàn 289.000 đ cho người mua?</b>
+ <p style="font-size:14px">Người mua gửi trả áo về shop; tiền về người mua <b>sau khi shop nhận lại hàng</b>. Đồng ý rồi thì <b>không rút lại được</b> và khiếu nại được đóng.<br>Nếu bạn cho rằng sản phẩm đúng mô tả lúc đặt, hãy chọn "Gửi bằng chứng" — nhân viên Shopee sẽ xem cả hai phía.</p>
+ <label><input type="checkbox" id="ok"> Tôi hiểu đồng ý hoàn là không rút lại được</label>
+ <div class="btns"><button class="btn danger" id="agree" disabled>Đồng ý hoàn tiền</button><button class="btn" id="cancel">Quay lại</button></div>
+</div></div>
+
+<script>
+const $=s=>document.querySelector(s);let L=2,state='start',t=null,sec=0,fixNote='',remind=false;
+const WHO='<div class="who"><span class="n">1</span>Trợ lý AI của Shopee · không phải nhân viên</div>';
+const me=x=>`<div class="me">${x}</div>`;
+// mỗi bong bóng một ý (quy tắc giọng nói ở §3); chỉ bong bóng đầu có dòng "Trợ lý AI"
+const ai=(...xs)=>xs.map((x,i)=>`<div class="ai">${i==0?WHO:''}${x}</div>`).join('');
+const sys=x=>`<div class="sys">${x}</div>`;
+const card=(seller)=>`<div class="ev"><div class="h"><span>${seller?'':'<span class="n">2</span>'}${seller?'Hệ thống so với mô tả lúc người mua đặt hàng':'So với mô tả LÚC BẠN ĐẶT, không phải mô tả hiện tại'}</span><span class="tag edit">Đã sửa sau khi ${seller?'người mua':'bạn'} đặt</span></div><div class="row">
+ <div><span class="tag main">Lúc ${seller?'người mua':'bạn'} đặt · 01/11</span><br>Chất liệu: <mark>100% cotton</mark></div>
+ <div><span class="tag edit">Hiện tại · sửa 05/11</span><br>Chất liệu: <mark>cotton pha</mark></div></div></div>`;
+const checklist=(tem)=>`<div style="margin-top:6px"><span class="n">3</span><span class="conf">${tem?'Đủ bằng chứng để gửi yêu cầu · chưa quyết':'Chưa quyết · đang chờ bằng chứng'}</span></div>
+ <ul class="chk"><li>✅ Ảnh sản phẩm</li><li>${tem?'✅':'❌'} Ảnh tem thành phần vải</li></ul>
+ <div style="font-size:13.5px;margin-top:4px">Hạn gửi yêu cầu trả hàng: còn <b>4 ngày</b> (đến hết 17/11)</div>`;
+const esc=`<button class="btn out" onclick="go('human')"><span class="n">5</span>Gặp nhân viên</button>`;
+const fix=`<button class="btn" onclick="go('fix')"><span class="n">6</span>AI hiểu sai? Báo lỗi</button>`;
+const userMsg=me('Shop ghi 100% cotton mà nhận về là polyester, giờ shop sửa thành "cotton pha" rồi!<small>📎 anh-ao.jpg</small>');
+
+function buyer(){
+ let h=userMsg;
+ if(state=='fix'){
+  h+=ai(`Cảm ơn bạn đã báo. Mình hiểu sai ở chỗ nào?<div class="btns">
+  <button class="btn sm" onclick="fixed('Sai đơn hàng')">Sai đơn hàng</button>
+  <button class="btn sm" onclick="fixed('Sai chỗ không đúng mô tả')">Sai chỗ không đúng</button>
+  <button class="btn sm" onclick="fixed('So nhầm bản mô tả')">So nhầm bản mô tả</button></div>`);
+  return h;}
+ if(state=='human'){
+  h+=me('Mình muốn nói chuyện với người thật');
+  h+=sys('chuyen_truong_nhom · tự làm');
+  h+=ai('Được bạn. Mình đã chuyển hồ sơ cho nhân viên Shopee, xử lý trong vòng <b>24 giờ</b>. Từ giờ AI không tự trả lời trong hồ sơ này nữa.',
+   'Nhân viên thấy sẵn đơn hàng, ảnh bạn gửi và <b>cả hai bản mô tả</b> kèm ngày shop sửa, nên bạn không phải kể lại.',
+   'Trong lúc chờ, hạn trả hàng vẫn tính đến hết <b>17/11</b>; bạn vẫn gửi yêu cầu được bất cứ lúc nào.');
+  return h;}
+ if(fixNote=='So nhầm bản mô tả') h+=ai('Xin lỗi bạn, mình đã so nhầm với mô tả hiện tại. Mô tả lúc bạn đặt là <b>"100% cotton"</b>, mình đã cập nhật lại hồ sơ của bạn.');
+ else if(fixNote) h+=sys('Đã ghi chú cho người duyệt: "'+fixNote+'"');
+
+ if(L==1){
+  h+=ai('Chào bạn, mình là trợ lý AI của Shopee. Mình rất tiếc, nhận về một chiếc áo khác với điều bạn đã chọn thật sự rất khó chịu.',
+   `Lúc bạn đặt (01/11), mô tả ghi "100% cotton"; shop sửa thành "cotton pha" vào 05/11.${card()}${checklist(false)}`,
+   `Bạn có thể tự gửi yêu cầu trả hàng: chọn đơn, chọn lý do "Không đúng mô tả", đính kèm ảnh tem vải.
+   <div class="btns"><button class="btn pri">Mở trang Trả hàng/Hoàn tiền (bạn tự điền)</button>${esc}</div>
+   <div class="box red" style="font-size:13px"><b>Cái giá của mức này:</b> người mua phải tự điền lại mọi thứ AI đã biết — đúng lời than "gửi ảnh rồi mà cứ bị hỏi lại". Người bán chỉ biết khi người mua tự gửi xong.</div>`);
+  return h;}
+
+ if(L==2){
+  if(state=='start'){
+   h+=ai('Chào bạn, mình là trợ lý AI của Shopee. Mình rất tiếc, nhận về một chiếc áo khác với điều bạn đã chọn thật sự rất khó chịu.',
+    `Mình đã kiểm tra: lúc bạn đặt (01/11), mô tả ghi <b>"100% cotton"</b>. Shop sửa thành "cotton pha" vào 05/11, sau khi bạn đặt. Mình sẽ luôn dựa vào <b>bản lúc bạn đặt</b>.${card()}`,
+    `Để hoàn tất yêu cầu trả hàng, bạn chỉ cần thêm <b>1 ảnh chụp rõ tem thành phần vải</b> trên áo. Bạn có <b>4 ngày, đến hết 17/11</b>.${checklist(false)}
+    <div class="box warn"><span class="n">4</span><b>Yêu cầu trả hàng đã điền sẵn — bạn kiểm tra, thêm ảnh tem rồi tự bấm gửi:</b>
+    <div class="form"><div><span>Đơn</span><span>#DH-24110731</span></div><div><span>Lý do</span><span>Không đúng mô tả — chất liệu</span></div><div><span>Bằng chứng</span><span>anh-ao.jpg · <i>ảnh tem vải (còn thiếu)</i></span></div><div><span>Muốn</span><span>Trả hàng, hoàn 289.000 đ</span></div></div>
+    <div class="btns"><button class="btn pri" onclick="go('sent')">Gửi ảnh tem vải & gửi yêu cầu</button>${esc}${fix}</div></div>`,
+    'Sau khi bạn gửi, shop có 48 giờ để phản hồi. Nếu hai bên chưa thống nhất, nhân viên Shopee sẽ xem xét và quyết định. Mình sẽ báo bạn ở từng bước.');
+   if(remind) h+=sys('2 ngày sau · 16/11')+ai('Nhắc nhẹ: yêu cầu của bạn còn 24 giờ, đến hết 17/11. Bạn chỉ cần gửi 1 ảnh tem vải là xong.');
+   else h+=`<div class="btns" style="align-self:center"><button class="btn sm" onclick="remind=true;render()">⏩ Giả lập: người mua không làm gì, còn 24 giờ</button></div>`;
+  }
+  else if(state=='sent'){
+   h+=me('📎 anh-tem-vai.jpg<small>Gửi yêu cầu trả hàng #DH-24110731</small>');
+   h+=sys('Yêu cầu đã tạo · gửi người bán qua yeu_cau_bang_chung · tự làm');
+   h+=ai(`Mình đã nhận ảnh tem và gửi yêu cầu cho shop.${checklist(true)}`,
+    'Shop có <b>48 giờ</b> (đến 15/11 10:20) để đồng ý hoặc gửi bằng chứng. Nếu shop phản đối hoặc không trả lời, nhân viên Shopee xử lý trong 24 giờ.',
+    `<b>Mình không hứa trước kết quả</b>; bạn không cần làm gì thêm, có cập nhật mình sẽ báo.<div class="btns">${esc}</div>`);}
+  else if(state=='staff'){
+   h+=me('📎 anh-tem-vai.jpg<small>Gửi yêu cầu trả hàng #DH-24110731</small>');
+   h+=sys('Shop phản đối / quá 48 giờ · chuyen_truong_nhom · tự làm');
+   h+=ai('Shop chưa đồng ý và đã gửi bằng chứng của họ.',
+    'Vì hai bên chưa thống nhất, hồ sơ đã chuyển <b>nhân viên Shopee</b>, xử lý trong <b>24 giờ</b>. Nhân viên xem cả hai bản mô tả, ảnh tem của bạn và bằng chứng của shop; hồ sơ có cờ <b>"mô tả sửa sau khi bán"</b>.',
+    `<div class="box hold" style="margin-top:0"><b>Nhân viên duyệt</b> <code>thuc_hien_hoan_tien</code> hoặc <code>tu_choi_khieu_nai</code>. AI chỉ soạn đề xuất, không tự làm việc này.</div><div class="btns">${fix}${esc}</div>`);}
+  else if(state=='agreed'){
+   h+=me('📎 anh-tem-vai.jpg<small>Gửi yêu cầu trả hàng #DH-24110731</small>');
+   h+=ai('Shop đã <b>đồng ý hoàn tiền</b>.',`<div class="box done" style="margin-top:0">Bạn gửi trả áo trước <b>20/11</b> theo mã vận đơn trong mục Trả hàng. Tiền <b>289.000 đ</b> về sau khi shop nhận lại hàng.</div>`);}
+  return h;}
+
+ // L==3
+ if(state=='undone'){
+  h+=ai('Đã hoàn tác: khoản hoàn bị huỷ, khiếu nại quay lại trạng thái chờ.',`Bạn muốn gửi yêu cầu trả hàng theo cách thường hay gặp nhân viên?<div class="btns"><button class="btn pri">Gửi yêu cầu trả hàng</button>${esc}</div>`);
+  return h;}
+ h+=ai(`Mô tả lúc bạn đặt ghi "100% cotton" nên áo không đúng mô tả. Mình đã <b>hoàn 289.000 đ</b> cho bạn. Bạn gửi trả áo trước 20/11 nhé.
+ <div class="box done"><span class="n">4</span>Đã hoàn. <b>Hoàn tác được trong <span class="timer" id="tm">10:00</span></b>.
+ <div class="btns"><button class="btn out" onclick="go('undone')">Hoàn tác</button>${esc}</div></div>
+ <div class="box red" style="font-size:13px"><b>Rủi ro của mức này:</b> AI kết luận khi chưa có ảnh tem và <b>người bán chưa được nghe</b> mà đã mất tiền. Nút hoàn tác chỉ người mua bấm được — trong khi bên bị thiệt là người bán, nên hoàn tác ở đây không bảo vệ ai. Cùng mức này, ở K7 (doạ bóc phốt) AI sẽ hoàn cho người đang doạ.</div>`);
+ return h;
+}
+
+function seller(){
+ if(L==1) return '<div class="muted">Chưa có yêu cầu. Người bán chỉ thấy khiếu nại khi người mua tự gửi qua trang Trả hàng.</div>';
+ if(L==3) return state=='undone'?'<div class="muted">Khoản hoàn đã bị người mua hoàn tác. Người bán vẫn chưa được hỏi ý kiến.</div>'
+  :'<div class="box red">Thông báo: <b>Đơn #DH-24110731 đã được hoàn 289.000 đ</b> cho người mua.<br><span class="muted">Không có hạn phản hồi, không có nút gửi bằng chứng. Người bán biết sau khi tiền đã đi.</span></div>';
+ if(state=='start'||state=='fix') return '<div class="muted">Chưa có yêu cầu — người mua chưa gửi. AI không gửi thay người mua.</div>';
+ if(state=='human') return '<div class="muted">Hồ sơ đang ở nhân viên Shopee. Người bán sẽ được xin bằng chứng nếu cần.</div>';
+ if(state=='agreed') return '<div class="box done">Bạn đã đồng ý hoàn. Chờ người mua gửi trả hàng trước 20/11; tiền hoàn sau khi bạn nhận lại hàng.</div>';
+ if(state=='staff') return '<div class="box hold">Bằng chứng của bạn đã gửi. Nhân viên Shopee đang xem cả hai phía, có kết quả trong <b>24 giờ</b>.</div>';
+ return `<div class="box warn"><b>Yêu cầu trả hàng mới</b> · #DH-24110731 · 289.000 đ<br>Lý do: Không đúng mô tả — chất liệu. Người mua: <i>ng***an</i> <span class="muted">(không hiện SĐT, địa chỉ)</span>
+ <div style="margin-top:6px">Hạn phản hồi: còn <span class="timer" id="tm">48:00:00</span>. Hết hạn mà chưa phản hồi → nhân viên Shopee xử lý trong 24 giờ.</div></div>
+ ${card(true)}
+ <div class="ev"><div class="row"><div>Ảnh người mua gửi: áo, tem thành phần vải</div><div>Bằng chứng của bạn: <i>chưa có</i></div></div></div>
+ <div class="btns"><button class="btn pri" onclick="$('#m').classList.add('show')">Đồng ý hoàn</button><button class="btn out" onclick="go('staff')">Gửi bằng chứng phản hồi</button><button class="btn sm" onclick="go('staff')">⏩ Giả lập: hết 48 giờ, không phản hồi</button></div>
+ <div class="muted" style="margin-top:8px"><span class="n">8</span>Không có thao tác trừ điểm hay khoá shop: <code>phat_shop</code> cấm với AI. Nghi hàng giả → AI chỉ gửi <code>bao_cao_vi_pham</code> sang bộ phận chuyên trách; chỉ bộ phận đó, sau khi xác minh, mới gọi <code>phat_shop</code>.</div>`;
+}
+
+function render(){
+ $('#chat').innerHTML=buyer();
+ $('#seller').innerHTML=seller();
+ const P={1:'"Mình chỉ cho bạn biết căn cứ và cách tự gửi." AI không làm gì thay ai. Không ai bị AI xử sai, nhưng người mua phải tự làm lại các bước AI đã biết, và người bán chỉ biết muộn.',
+ 2:'Người mua: "Trợ lý AI giúp bạn gửi đúng yêu cầu, đủ bằng chứng, đúng hạn — <b>người bán hoặc nhân viên Shopee quyết định hoàn tiền</b>." Người bán: "Không có khoản hoàn nào xảy ra trước khi bạn được phản hồi trong 48 giờ." <b>Mức nhóm chọn (§4).</b>',
+ 3:'"Trợ lý AI giải quyết khiếu nại cho bạn ngay, sai thì hoàn tác." Nhanh nhất với người mua, nhưng AI phán quyết thay hai bên khi chưa đủ bằng chứng, và người bán đúng (K7, K8) sẽ mất tiền trước khi được nghe.'};
+ $('#promise').innerHTML=P[L];
+ const lv={1:['Cấm (chỉ hướng dẫn)','p-sug','AI không hoàn, không đề xuất. Không sai thay ai, nhưng người mua đúng phải tự làm mọi bước, dễ bỏ cuộc.'],
+  2:['Cần người duyệt','p-ask','Tiền đã về người mua thì khó đòi lại. Người bán bấm "Đồng ý hoàn" = chính bên mất tiền duyệt; phản đối hoặc quá 48 giờ thì nhân viên duyệt trong 24 giờ. Không có nhánh "quá hạn thì tự hoàn".'],
+  3:['Tự làm + hoàn tác','p-auto','Quá tay: chưa có ảnh tem, người bán chưa được nghe. Hoàn tác chỉ người mua bấm được, không bảo vệ bên bị thiệt.']}[L];
+ const T=[['xem_mo_ta_luc_dat','nhóm thêm · chỉ đọc','Tự làm','p-auto','Không đổi gì. Không có tool này thì AI đọc mô tả hiện tại (đã sửa) → người mua đúng mà thua (K1).'],
+  ['yeu_cau_bang_chung','','Tự làm','p-auto','"Tin đã tới", nhưng sai chỉ phiền, không mất tiền; chờ duyệt thì hạn 7 ngày / 48 giờ trôi. Luật: chỉ gửi khi đã chọn đúng đơn, chỉ dùng mẫu cố định (chặn K3, K6).'],
+  ['chuyen_truong_nhom','','Tự làm','p-auto','Đảo được; chuyển thừa chỉ tốn công nhân viên. Bắt buộc khi hai bên lệch, mô tả sửa sau khi bán, có lời doạ, người dùng bấm "Gặp nhân viên".'],
+  ['soan_de_xuat_hoan_tien','nhóm tách từ soan_hoan_tien','Tự làm','p-auto','Chỉ soạn hồ sơ cho người bán / nhân viên, không chuyển tiền. Người mua không thấy, để đề xuất không thành lời hứa.'],
+  ['thuc_hien_hoan_tien','nhóm tách từ soan_hoan_tien',lv[0],lv[1],lv[2],1],
+  ['tu_choi_khieu_nai','','Cần người duyệt · chỉ nhân viên','p-ask','Sai thì người mua mất tiền, giữ hàng sai, thường bỏ cuộc âm thầm (K1, K4). Người bán không duyệt được: xung đột lợi ích. AI chỉ được nói "chưa đủ thông tin để xác nhận".'],
+  ['bao_cao_vi_pham','nhóm thêm','Tự làm','p-auto','Báo cáo nội bộ, chưa đụng tới shop, bị bác thì đóng → đảo được. Chỉ gom sự thật: không chấm điểm, không ghi "hàng giả", không đề xuất mức phạt (K5).'],
+  ['phat_shop','','Cấm với AI','p-no','Ảnh hưởng cả shop (1.200 đơn khác), khó đảo. Không có nút; chỉ bộ phận chuyên trách gọi sau khi xác minh bao_cao_vi_pham.']];
+ $('#tools').innerHTML=T.map(r=>`<tr class="${r[5]?'changed':''}"><td><code>${r[0]}</code>${r[1]?`<br><small>${r[1]}</small>`:''}</td><td><span class="pill ${r[3]}">${r[2]}</span></td><td>${r[4]}</td></tr>`).join('');
+ const A=[['1','HAX G1 · làm rõ hệ thống làm được gì','Dòng "Trợ lý AI của Shopee · không phải nhân viên" (Luật AI 134/2025, Điều 11); "Mình sẽ báo bạn… nhân viên Shopee quyết định".'],
+  ['2','HAX G11 + PAIR Explainability & Trust','Thẻ so sánh: "Lúc bạn đặt · 01/11: 100% cotton" cạnh "Hiện tại · sửa 05/11: cotton pha", chỗ khác tô màu, nhãn "Đã sửa sau khi bạn đặt". Cùng thẻ hiện ở phía người bán.'],
+  ['3','HAX G2 · làm rõ chắc tới đâu','Nhãn "Chưa quyết · đang chờ bằng chứng", checklist ✅ ảnh sản phẩm · ❌ ảnh tem vải, và hạn "còn 4 ngày, đến hết 17/11".'],
+  ['4','HAX G8/G9 + PAIR Feedback & Control','Mức ②: yêu cầu điền sẵn, người mua tự bấm gửi. Mức ③: hoàn tác có hạn — và vì sao nó không đủ.'],
+  ['5','PAIR Errors + Graceful Failure · HAX G8 (gạt bỏ dễ)','Thanh cố định đầu khung chat "Không muốn chat với AI? Nói chuyện với người thật", có ở mọi mức và mọi trạng thái; bấm là chuyen_truong_nhom, AI thôi trả lời. Nhân viên thấy sẵn hai bản mô tả, người mua không phải kể lại.'],
+  ['6','HAX G9 + G15 · sửa dễ, feedback chi tiết','"AI hiểu sai? Báo lỗi" → chọn sai chỗ nào; chọn "So nhầm bản mô tả" thì AI nhận lỗi và so lại (đường correction ở §3).'],
+  ['7','Hai bên cùng được nghe','Kênh người bán: hạn 48 giờ đếm ngược, "Đồng ý hoàn" có hộp xác nhận, hoặc "Gửi bằng chứng". Người mua hiện là ng***an, không SĐT, địa chỉ.'],
+  ['8','HAX G1 · không hứa điều không làm','Không có nút phạt / khoá shop; ghi rõ luồng bao_cao_vi_pham → bộ phận chuyên trách → phat_shop.']];
+ const show={1:['1','2','3','5'],2:['1','2','3','4','5','6','7','8'],3:['4','5']}[L];
+ $('#ann-list').innerHTML=A.filter(a=>show.includes(a[0])).map(a=>`<li><span class="n">${a[0]}</span><b>${a[1]}</b> — ${a[2]}</li>`).join('')
+  +(L==1?'<li class="muted">Ở mức ① không có ④⑥⑦: AI không soạn, không gửi gì, người bán chưa biết có khiếu nại.</li>':L==3?'<li class="muted">Ở mức ③ mất ①②③⑦: AI không nói mình chưa chắc, không hiện mô tả đã sửa, người bán không được nghe — đó chính là chỗ mức này quá tay.</li>':'');
+ clearInterval(t);const tm=$('#tm');
+ if(tm){const long=tm.textContent.length>5;sec=long?48*3600:600;
+  t=setInterval(()=>{sec--;const p=x=>String(x).padStart(2,'0');
+   tm.textContent=long?p(Math.floor(sec/3600))+':'+p(Math.floor(sec%3600/60))+':'+p(sec%60):p(Math.floor(sec/60))+':'+p(sec%60);
+   if(sec<=0)clearInterval(t)},1000)}
+}
+function go(s){state=s;render()}
+function fixed(x){fixNote=x;state='start';render()}
+document.querySelectorAll('.toggle button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.toggle button').forEach(x=>x.classList.remove('on'));b.classList.add('on');L=+b.dataset.l;state='start';fixNote='';remind=false;render()});
+$('#ann').onchange=e=>document.body.classList.toggle('hide-n',!e.target.checked);
+$('#ok').onchange=e=>$('#agree').disabled=!e.target.checked;
+$('#cancel').onclick=()=>$('#m').classList.remove('show');
+$('#agree').onclick=()=>{$('#m').classList.remove('show');$('#ok').checked=false;$('#agree').disabled=true;go('agreed')};
+// Mở thẳng một trạng thái để chụp ảnh / demo: index.html?l=2&s=sent
+const q=new URLSearchParams(location.search);
+if(q.get('l')){L=+q.get('l');document.querySelectorAll('.toggle button').forEach(x=>x.classList.toggle('on',+x.dataset.l===L))}
+if(q.get('s'))state=q.get('s');
+render();
+</script></body></html>

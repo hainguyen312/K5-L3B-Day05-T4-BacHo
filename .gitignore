@@ -1,0 +1,6 @@
+# Không commit API key
+.env
+*.env
+__pycache__/
+.venv/
+.DS_Store
